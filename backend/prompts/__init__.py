@@ -1,0 +1,3 @@
+"""
+Word analysis prompts package
+"""
