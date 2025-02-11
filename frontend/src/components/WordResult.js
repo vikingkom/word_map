@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Paper,
   Typography,
   Chip,
-  Card,
-  CardContent,
-  IconButton,
+  Box,
   Tooltip,
-  Box
+  IconButton,
+  Collapse
 } from '@mui/material';
 import TranslateIcon from '@mui/icons-material/Translate';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
@@ -21,6 +20,7 @@ import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
 import LanguageIcon from '@mui/icons-material/Language';
 import FlagIcon from '@mui/icons-material/Flag';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { GB, RU, DE } from 'country-flag-icons/react/3x2';
 
 const FlagComponent = ({ country, size = 20 }) => {
@@ -147,6 +147,173 @@ const IdiomsSection = ({ idioms }) => (
   </MinimalCard>
 );
 
+const MemorizationHintSection = ({ hint, reason, language }) => (
+  <Box 
+    sx={{ 
+      backgroundColor: '#f0f4f8', 
+      borderRadius: 2, 
+      p: 2, 
+      mb: 2, 
+      display: 'flex', 
+      alignItems: 'center',
+      gap: 2
+    }}
+  >
+    <LightbulbIcon color="primary" />
+    <Box>
+      <Typography variant="subtitle2" color="text.secondary">
+        Best Language for Memorization: {language}
+      </Typography>
+      <Typography variant="body2" color="text.primary">
+        {reason}
+      </Typography>
+      {hint && (
+        <Typography variant="body2" color="primary.main" sx={{ mt: 1, fontStyle: 'italic' }}>
+          Memorization Hint: {hint}
+        </Typography>
+      )}
+    </Box>
+  </Box>
+);
+
+const SemanticNetworkSection = ({ synonyms, antonyms }) => (
+  <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 2 }}>
+    {synonyms?.length > 0 && (
+      <Box>
+        <Tooltip title="Semantic Network: Synonyms">
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <CompareArrowsIcon fontSize="small" color="primary" />
+            <Typography variant="subtitle2">Synonyms:</Typography>
+            <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
+              {synonyms.map((syn, idx) => (
+                <Chip 
+                  key={idx} 
+                  label={syn} 
+                  size="small" 
+                  variant="outlined" 
+                  color="primary"
+                />
+              ))}
+            </Box>
+          </Box>
+        </Tooltip>
+      </Box>
+    )}
+    {antonyms?.length > 0 && (
+      <Box>
+        <Tooltip title="Semantic Network: Antonyms">
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <CompareArrowsIcon fontSize="small" color="error" />
+            <Typography variant="subtitle2">Antonyms:</Typography>
+            <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
+              {antonyms.map((ant, idx) => (
+                <Chip 
+                  key={idx} 
+                  label={ant} 
+                  size="small" 
+                  variant="outlined" 
+                  color="error"
+                />
+              ))}
+            </Box>
+          </Box>
+        </Tooltip>
+      </Box>
+    )}
+  </Box>
+);
+
+const ExpandableSection = ({ title, children, icon: Icon }) => {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <Box sx={{ mb: 2, border: '1px solid', borderColor: 'divider', borderRadius: 2 }}>
+      <Box 
+        sx={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center', 
+          p: 1, 
+          cursor: 'pointer' 
+        }}
+        onClick={() => setExpanded(!expanded)}
+      >
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Icon color="primary" fontSize="small" />
+          <Typography variant="subtitle1">{title}</Typography>
+        </Box>
+        <ExpandMoreIcon 
+          sx={{ 
+            transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)', 
+            transition: 'transform 0.3s' 
+          }} 
+        />
+      </Box>
+      <Collapse in={expanded}>
+        <Box sx={{ p: 2 }}>
+          {children}
+        </Box>
+      </Collapse>
+    </Box>
+  );
+};
+
+const DetailedGrammarSection = ({ grammar }) => {
+  if (!grammar) return null;
+
+  return (
+    <Box>
+      {grammar.verb && (
+        <ExpandableSection title="Verb Grammar Details" icon={GrammarIcon}>
+          <Box>
+            <Typography variant="h6">Conjugation</Typography>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+              {Object.entries(grammar.verb.conjugation || {}).map(([form, value]) => (
+                <Tooltip key={form} title={form}>
+                  <Chip 
+                    label={`${form}: ${value}`} 
+                    size="small" 
+                    variant="outlined" 
+                  />
+                </Tooltip>
+              ))}
+            </Box>
+
+            {grammar.verb.grammar_properties && (
+              <Box sx={{ mt: 2 }}>
+                <Typography variant="h6">Grammar Properties</Typography>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                  <Tooltip title="Verb Type">
+                    <Chip 
+                      label={`Type: ${grammar.verb.grammar_properties.type}`}
+                      size="small"
+                      icon={<MenuBookIcon />}
+                    />
+                  </Tooltip>
+                  <Tooltip title="Required Case">
+                    <Chip 
+                      label={`Case: ${grammar.verb.grammar_properties.required_case}`}
+                      size="small"
+                      icon={<GrammarIcon />}
+                    />
+                  </Tooltip>
+                  <Tooltip title="Auxiliary Verb">
+                    <Chip 
+                      label={`Auxiliary: ${grammar.verb.grammar_properties.auxiliary_verb}`}
+                      size="small"
+                      icon={<LinkIcon />}
+                    />
+                  </Tooltip>
+                </Box>
+              </Box>
+            )}
+          </Box>
+        </ExpandableSection>
+      )}
+    </Box>
+  );
+};
+
 const MeaningSection = ({ meaning, index }) => (
   <Box sx={{ 
     mb: 4, 
@@ -159,20 +326,35 @@ const MeaningSection = ({ meaning, index }) => (
     }
   }}>
     {/* Translations header */}
-    <Box sx={{ mb: 2, display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+    <Box sx={{ mb: 2, display: 'flex', gap: 1, flexWrap: 'wrap', alignItems: 'center' }}>
       {meaning.translations?.english?.length > 0 && (
-        <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center' }}>
+        <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <FlagComponent country="GB" />
           {meaning.translations.english.join('; ')}
         </Typography>
       )}
       {meaning.translations?.russian?.length > 0 && (
-        <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center' }}>
+        <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <FlagComponent country="RU" />
           {meaning.translations.russian.join('; ')}
         </Typography>
       )}
     </Box>
+
+    {/* Memorization Hints */}
+    {meaning.best_language_for_memorization && (
+      <MemorizationHintSection 
+        hint={meaning.best_language_for_memorization.hint}
+        reason={meaning.best_language_for_memorization.reason}
+        language={meaning.best_language_for_memorization.language}
+      />
+    )}
+
+    {/* Semantic Network */}
+    <SemanticNetworkSection 
+      synonyms={meaning.synonyms} 
+      antonyms={meaning.antonyms} 
+    />
 
     {/* German meaning description */}
     <Typography variant="body1" sx={{ mb: 2, fontStyle: 'italic' }}>
@@ -203,39 +385,7 @@ const MeaningSection = ({ meaning, index }) => (
       </Tooltip>
     </Box>
 
-    {/* Synonyms and Antonyms section */}
-    <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 2 }}>
-      {meaning.synonyms?.length > 0 && (
-        <Box>
-          <Tooltip title="Synonyms">
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-              <CompareArrowsIcon fontSize="small" color="primary" />
-              <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
-                {meaning.synonyms.map((syn, idx) => (
-                  <Chip key={idx} label={syn} size="small" variant="outlined" />
-                ))}
-              </Box>
-            </Box>
-          </Tooltip>
-        </Box>
-      )}
-      {meaning.antonyms?.length > 0 && (
-        <Box>
-          <Tooltip title="Antonyms">
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-              <CompareArrowsIcon fontSize="small" color="error" />
-              <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
-                {meaning.antonyms.map((ant, idx) => (
-                  <Chip key={idx} label={ant} size="small" variant="outlined" color="error" />
-                ))}
-              </Box>
-            </Box>
-          </Tooltip>
-        </Box>
-      )}
-    </Box>
-
-    {/* Examples section */}
+    {/* Rest of the existing sections remain the same */}
     {meaning.examples?.illustrative?.length > 0 && (
       <MinimalCard icon={MenuBookIcon} title="Examples">
         <Box>
@@ -258,101 +408,6 @@ const MeaningSection = ({ meaning, index }) => (
     )}
   </Box>
 );
-
-const GrammarSection = ({ grammar }) => {
-  if (!grammar) return null;
-  
-  return (
-    <MinimalCard icon={GrammarIcon} title="Grammar">
-      {grammar.verb && (
-        <Box mb={2}>
-          <Tooltip title="Verb Forms">
-            <Box display="flex" alignItems="center" gap={0.5}>
-              <MenuBookIcon fontSize="small" color="primary" />
-              <Typography variant="body2">{grammar.verb.infinitive}</Typography>
-            </Box>
-          </Tooltip>
-          
-          {grammar.verb.conjugation && (
-            <Box display="flex" flexWrap="wrap" gap={0.5} mt={1}>
-              {Object.entries(grammar.verb.conjugation).map(([form, value]) => (
-                <Tooltip key={form} title={form}>
-                  <Chip
-                    label={value}
-                    size="small"
-                    variant="outlined"
-                  />
-                </Tooltip>
-              ))}
-            </Box>
-          )}
-
-          {grammar.verb.grammar_properties && (
-            <Box display="flex" flexWrap="wrap" gap={0.5} mt={1}>
-              <Tooltip title="Type">
-                <Chip 
-                  label={grammar.verb.grammar_properties.type}
-                  size="small" 
-                  icon={<MenuBookIcon />}
-                />
-              </Tooltip>
-              <Tooltip title="Required Case">
-                <Chip 
-                  label={grammar.verb.grammar_properties.required_case}
-                  size="small" 
-                  icon={<GrammarIcon />}
-                />
-              </Tooltip>
-              <Tooltip title="Auxiliary Verb">
-                <Chip 
-                  label={grammar.verb.grammar_properties.auxiliary_verb}
-                  size="small" 
-                  icon={<LinkIcon />}
-                />
-              </Tooltip>
-            </Box>
-          )}
-        </Box>
-      )}
-
-      {grammar.noun && (
-        <Box>
-          <Box display="flex" flexWrap="wrap" gap={0.5}>
-            <Tooltip title="Gender">
-              <Chip 
-                label={grammar.noun.gender}
-                size="small" 
-                icon={<MenuBookIcon />}
-              />
-            </Tooltip>
-            <Tooltip title="Plural">
-              <Chip 
-                label={grammar.noun.plural}
-                size="small" 
-                icon={<CompareArrowsIcon />}
-              />
-            </Tooltip>
-          </Box>
-          
-          {grammar.noun.cases && (
-            <Box display="flex" flexWrap="wrap" gap={0.5} mt={1}>
-              {Object.entries(grammar.noun.cases).map(([caseType, form]) => (
-                <Tooltip key={caseType} title={caseType}>
-                  <Chip
-                    label={form}
-                    size="small"
-                    icon={<GrammarIcon />}
-                    variant="outlined"
-                  />
-                </Tooltip>
-              ))}
-            </Box>
-          )}
-        </Box>
-      )}
-    </MinimalCard>
-  );
-};
 
 const WordResult = ({ result }) => {
   if (!result) return null;
@@ -379,7 +434,7 @@ const WordResult = ({ result }) => {
         ))}
       </Box>
 
-      <GrammarSection grammar={result.grammar} />
+      <DetailedGrammarSection grammar={result.grammar} />
     </Paper>
   );
 };
