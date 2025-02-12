@@ -19,7 +19,37 @@
         <input type="text" id="language" name="language" value="german">
     </div>
     <div>
+        <label for="json_data">JSON Data (Optional):</label>
+        <textarea id="json_data" name="json_data" rows="10" cols="50">{
+  "meanings": [
+    {
+      "meaning": "",
+      "translations": {
+        "english": [],
+        "russian": []
+      }
+    }
+  ]
+}</textarea>
+    </div>
+    <div>
         <input type="submit" value="Create Word Analysis">
     </div>
 </form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const jsonDataTextarea = document.getElementById('json_data');
+    
+    // Validate JSON on input
+    jsonDataTextarea.addEventListener('input', function() {
+        try {
+            JSON.parse(this.value);
+            this.style.borderColor = 'green';
+        } catch(e) {
+            this.style.borderColor = 'red';
+        }
+    });
+});
+</script>
 {% endblock %}
