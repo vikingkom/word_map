@@ -13,12 +13,16 @@ db = SQLAlchemy()
 migrate = Migrate()
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, 
+                template_folder=os.path.join(os.path.dirname(__file__), 'templates'),
+                static_folder=os.path.join(os.path.dirname(__file__), 'static'))
     
     # Configure the Flask application
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', os.urandom(24))
+    app.config['DEBUG'] = True
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
 
     # Initialize CORS
     CORS(app)
@@ -27,8 +31,21 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
+    # Logging
+    import logging
+    logging.basicConfig(level=logging.DEBUG)
+
     # Register blueprints
     from .routes import api
+    from .routes.admin_routes import admin_bp
+    print("Registering blueprints...")  # Debug print
     app.register_blueprint(api)
+    app.register_blueprint(admin_bp)
+    print("Blueprints registered!")  # Debug print
+
+    # Print all registered routes
+    print("Registered routes:")
+    for rule in app.url_map.iter_rules():
+        print(f"{rule.endpoint}: {rule.rule}")
 
     return app

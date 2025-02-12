@@ -1,0 +1,25 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Create Word Analysis{% endblock %}
+
+{% block content %}
+<h1>Create Word Analysis</h1>
+
+<form method="post">
+    <div>
+        <label for="word">Word:</label>
+        <input type="text" id="word" name="word" required>
+    </div>
+    <div>
+        <label for="part_of_speech">Part of Speech:</label>
+        <input type="text" id="part_of_speech" name="part_of_speech" required>
+    </div>
+    <div>
+        <label for="language">Language:</label>
+        <input type="text" id="language" name="language" value="german">
+    </div>
+    <div>
+        <input type="submit" value="Create Word Analysis">
+    </div>
+</form>
+{% endblock %}

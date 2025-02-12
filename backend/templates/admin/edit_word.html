@@ -1,0 +1,25 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Edit Word Analysis{% endblock %}
+
+{% block content %}
+<h1>Edit Word Analysis</h1>
+
+<form method="post">
+    <div>
+        <label for="word">Word:</label>
+        <input type="text" id="word" name="word" value="{{ word.word }}" required>
+    </div>
+    <div>
+        <label for="part_of_speech">Part of Speech:</label>
+        <input type="text" id="part_of_speech" name="part_of_speech" value="{{ word.part_of_speech }}" required>
+    </div>
+    <div>
+        <label for="language">Language:</label>
+        <input type="text" id="language" name="language" value="{{ word.language }}">
+    </div>
+    <div>
+        <input type="submit" value="Update Word Analysis">
+    </div>
+</form>
+{% endblock %}
