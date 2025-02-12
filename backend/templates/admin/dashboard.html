@@ -24,7 +24,7 @@
             <td>{{ word.part_of_speech }}</td>
             <td>{{ word.language }}</td>
             <td>
-                <pre>{{ word.data|tojson(indent=2) }}</pre>
+                <pre id="json-data-{{ word.id }}">{{ word.data|tojson(indent=2) }}</pre>
             </td>
             <td>
                 <a href="{{ url_for('admin.edit_word', word_id=word.id) }}">Edit</a>
@@ -36,4 +36,47 @@
         {% endfor %}
     </tbody>
 </table>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to decode Unicode escape sequences
+    function decodeUnicode(str) {
+        return str.replace(/\\u([0-9a-fA-F]{4})/g, function(match, group) {
+            return String.fromCharCode(parseInt(group, 16));
+        });
+    }
+
+    // Find all pre elements with JSON data
+    document.querySelectorAll('pre[id^="json-data-"]').forEach(function(pre) {
+        try {
+            // Parse the JSON
+            let jsonData = JSON.parse(pre.textContent);
+            
+            // Recursively decode Unicode in the entire JSON object
+            function decodeUnicodeInObject(obj) {
+                if (typeof obj === 'string') {
+                    return decodeUnicode(obj);
+                }
+                if (Array.isArray(obj)) {
+                    return obj.map(decodeUnicodeInObject);
+                }
+                if (obj !== null && typeof obj === 'object') {
+                    let newObj = {};
+                    for (let key in obj) {
+                        newObj[key] = decodeUnicodeInObject(obj[key]);
+                    }
+                    return newObj;
+                }
+                return obj;
+            }
+
+            // Decode and re-stringify with proper Unicode characters
+            let decodedJsonData = decodeUnicodeInObject(jsonData);
+            pre.textContent = JSON.stringify(decodedJsonData, null, 2);
+        } catch (e) {
+            console.error('Error decoding JSON:', e);
+        }
+    });
+});
+</script>
 {% endblock %}

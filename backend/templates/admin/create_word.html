@@ -41,10 +41,39 @@
 document.addEventListener('DOMContentLoaded', function() {
     const jsonDataTextarea = document.getElementById('json_data');
     
+    // Function to decode Unicode escape sequences
+    function decodeUnicode(str) {
+        return str.replace(/\\u([0-9a-fA-F]{4})/g, function(match, group) {
+            return String.fromCharCode(parseInt(group, 16));
+        });
+    }
+
     // Validate JSON on input
     jsonDataTextarea.addEventListener('input', function() {
         try {
-            JSON.parse(this.value);
+            let jsonData = JSON.parse(this.value);
+            
+            // Recursively decode Unicode in the entire JSON object
+            function decodeUnicodeInObject(obj) {
+                if (typeof obj === 'string') {
+                    return decodeUnicode(obj);
+                }
+                if (Array.isArray(obj)) {
+                    return obj.map(decodeUnicodeInObject);
+                }
+                if (obj !== null && typeof obj === 'object') {
+                    let newObj = {};
+                    for (let key in obj) {
+                        newObj[key] = decodeUnicodeInObject(obj[key]);
+                    }
+                    return newObj;
+                }
+                return obj;
+            }
+
+            // Decode and re-stringify with proper Unicode characters
+            let decodedJsonData = decodeUnicodeInObject(jsonData);
+            this.value = JSON.stringify(decodedJsonData, null, 2);
             this.style.borderColor = 'green';
         } catch(e) {
             this.style.borderColor = 'red';
