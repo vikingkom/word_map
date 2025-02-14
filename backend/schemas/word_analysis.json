@@ -31,15 +31,19 @@
           }
         ]
       },
-      "prepositions": {
-        "<preposition1>": [
-          {
-            "de": "<Example>",
-            "en": "<English translation>",
-            "ru": "<Russian translation>"
-          }
-        ]
-      },
+      "prepositions": [
+        {
+          "preposition": "<preposition>",
+          "case": "<accusative/dative/genitive>",
+          "examples": [
+            {
+              "de": "<Example>",
+              "en": "<English translation>",
+              "ru": "<Russian translation>"
+            }
+          ]
+        }
+      ],
       "synonyms": ["<synonym1>", "<synonym2>"],
       "antonyms": ["<antonym1>", "<antonym2>"],
       "idioms_and_common_phrases": [
@@ -128,15 +132,19 @@
               }
             ]
           },
-          "prepositions": {
-            "<preposition1>": [
-              {
-                "de": "<Example>",
-                "en": "<English translation>",
-                "ru": "<Russian translation>"
-              }
-            ]
-          },
+          "prepositions": [
+            {
+              "preposition": "<preposition>",
+              "case": "<accusative/dative/genitive>",
+              "examples": [
+                {
+                  "de": "<Example>",
+                  "en": "<English translation>",
+                  "ru": "<Russian translation>"
+                }
+              ]
+            }
+          ],
           "synonyms": ["<synonym1>", "<synonym2>"],
           "antonyms": ["<antonym1>", "<antonym2>"],
           "idioms_and_common_phrases": [

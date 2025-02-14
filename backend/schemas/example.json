@@ -1,0 +1,236 @@
+{
+    "data": {
+      "grammar": {
+        "verb": {
+          "all_forms": {
+            "du": "stehst bevor",
+            "er/sie/es": "steht bevor",
+            "ich": "stehe bevor",
+            "ihr": "steht bevor",
+            "sie/Sie": "stehen bevor",
+            "wir": "stehen bevor"
+          },
+          "conjugation": {
+            "imperative": "bevorsteh!",
+            "past": "stand bevor",
+            "perfect": "hat bevorgestanden",
+            "present": "steht bevor",
+            "subjunctive": "stehe bevor"
+          },
+          "grammar_properties": {
+            "auxiliary_verb": "haben",
+            "common_prepositions": [
+              "vor"
+            ],
+            "declension": {
+              "past_participle": "bevorstanden",
+              "present_participle": "bevorstehend"
+            },
+            "required_case": "none",
+            "separable_prefix": "bevor-",
+            "type": "intransitive"
+          },
+          "infinitive": "bevorstehen",
+          "related_phrases": []
+        }
+      },
+      "meanings": [
+        {
+          "antonyms": [],
+          "best_language_for_memorization": {
+            "hint": "Think of 'before' standing, something happening soon.",
+            "language": "English",
+            "reason": "meaning similarity"
+          },
+          "comprehension_level": "B2",
+          "examples": {
+            "illustrative": [
+              {
+                "de": "Ein schwieriger Test steht bevor.",
+                "en": "A difficult test is imminent.",
+                "ru": "Трудный тест неизбежен."
+              },
+              {
+                "de": "Große Veränderungen stehen bevor.",
+                "en": "Big changes are impending.",
+                "ru": "Большие изменения грозят."
+              },
+              {
+                "de": "Ein wichtiger Termin steht bevor.",
+                "en": "An important appointment is approaching.",
+                "ru": "Важная встреча не за горами."
+              }
+            ],
+            "real_world": [
+              {
+                "de": "Die Feier steht bevor.",
+                "en": "The celebration is imminent.",
+                "ru": "Праздник не за горами."
+              },
+              {
+                "de": "Der Urlaub steht bevor.",
+                "en": "The vacation is impending.",
+                "ru": "Отпуск грозит."
+              },
+              {
+                "de": "Ein großer Erfolg steht bevor.",
+                "en": "A big success is on the horizon.",
+                "ru": "Большой успех не за горами."
+              }
+            ]
+          },
+          "idioms_and_common_phrases": [],
+          "meaning": "to be imminent or impending",
+          "prepositions": {
+            "vor": [
+              {
+                "de": "Große Herausforderungen stehen vor uns.",
+                "en": "Big challenges are ahead of us.",
+                "ru": "Большие вызовы впереди нас."
+              },
+              {
+                "de": "Eine wichtige Entscheidung steht vor der Tür.",
+                "en": "An important decision is around the corner.",
+                "ru": "Важное решение на пороге."
+              },
+              {
+                "de": "Ein neues Abenteuer steht vor Beginn.",
+                "en": "A new adventure is about to begin.",
+                "ru": "Новое приключение готово начаться."
+              }
+            ]
+          },
+          "synonyms": [],
+          "translations": {
+            "english": [
+              "to be imminent",
+              "to be impending"
+            ],
+            "russian": [
+              "быть неизбежным",
+              "быть грозящим"
+            ]
+          },
+          "usage_frequency": "medium"
+        }
+      ],
+      "part_of_speech": "verb",
+      "word": "bevorstehen"
+    },
+    "grammar": {
+      "verb": {
+        "all_forms": {
+          "du": "stehst bevor",
+          "er/sie/es": "steht bevor",
+          "ich": "stehe bevor",
+          "ihr": "steht bevor",
+          "sie/Sie": "stehen bevor",
+          "wir": "stehen bevor"
+        },
+        "conjugation": {
+          "imperative": "bevorsteh!",
+          "past": "stand bevor",
+          "perfect": "hat bevorgestanden",
+          "present": "steht bevor",
+          "subjunctive": "stehe bevor"
+        },
+        "grammar_properties": {
+          "auxiliary_verb": "haben",
+          "common_prepositions": [
+            "vor"
+          ],
+          "declension": {
+            "past_participle": "bevorstanden",
+            "present_participle": "bevorstehend"
+          },
+          "required_case": "none",
+          "separable_prefix": "bevor-",
+          "type": "intransitive"
+        },
+        "infinitive": "bevorstehen",
+        "related_phrases": []
+      }
+    },
+    "meanings": [
+      {
+        "antonyms": [],
+        "best_language_for_memorization": {
+          "hint": "Think of 'before' standing, something happening soon.",
+          "language": "English",
+          "reason": "meaning similarity"
+        },
+        "comprehension_level": "B2",
+        "examples": {
+          "illustrative": [
+            {
+              "de": "Ein schwieriger Test steht bevor.",
+              "en": "A difficult test is imminent.",
+              "ru": "Трудный тест неизбежен."
+            },
+            {
+              "de": "Große Veränderungen stehen bevor.",
+              "en": "Big changes are impending.",
+              "ru": "Большие изменения грозят."
+            },
+            {
+              "de": "Ein wichtiger Termin steht bevor.",
+              "en": "An important appointment is approaching.",
+              "ru": "Важная встреча не за горами."
+            }
+          ],
+          "real_world": [
+            {
+              "de": "Die Feier steht bevor.",
+              "en": "The celebration is imminent.",
+              "ru": "Праздник не за горами."
+            },
+            {
+              "de": "Der Urlaub steht bevor.",
+              "en": "The vacation is impending.",
+              "ru": "Отпуск грозит."
+            },
+            {
+              "de": "Ein großer Erfolg steht bevor.",
+              "en": "A big success is on the horizon.",
+              "ru": "Большой успех не за горами."
+            }
+          ]
+        },
+        "idioms_and_common_phrases": [],
+        "meaning": "to be imminent or impending",
+        "prepositions": {
+          "vor": [
+            {
+              "de": "Große Herausforderungen stehen vor uns.",
+              "en": "Big challenges are ahead of us.",
+              "ru": "Большие вызовы впереди нас."
+            },
+            {
+              "de": "Eine wichtige Entscheidung steht vor der Tür.",
+              "en": "An important decision is around the corner.",
+              "ru": "Важное решение на пороге."
+            },
+            {
+              "de": "Ein neues Abenteuer steht vor Beginn.",
+              "en": "A new adventure is about to begin.",
+              "ru": "Новое приключение готово начаться."
+            }
+          ]
+        },
+        "synonyms": [],
+        "translations": {
+          "english": [
+            "to be imminent",
+            "to be impending"
+          ],
+          "russian": [
+            "быть неизбежным",
+            "быть грозящим"
+          ]
+        },
+        "usage_frequency": "medium"
+      }
+    ],
+    "part_of_speech": "verb",
+    "word": "bevorstehen"
+  }
