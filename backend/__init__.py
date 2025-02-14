@@ -36,10 +36,10 @@ def create_app():
     logging.basicConfig(level=logging.DEBUG)
 
     # Register blueprints
-    from .routes import api
     from .routes.admin_routes import admin_bp
+    from .routes.api_routes import api_bp
     print("Registering blueprints...")  # Debug print
-    app.register_blueprint(api)
+    app.register_blueprint(api_bp)
     app.register_blueprint(admin_bp)
     print("Blueprints registered!")  # Debug print
 

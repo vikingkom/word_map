@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
-from backend.models import WordAnalysis
+from backend.models.word import WordAnalysis
 from backend import db
 import json
 

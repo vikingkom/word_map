@@ -1,14 +1,14 @@
 from flask import Blueprint, request, jsonify
-from . import db
-from .models import Word, UserProgress
-from .services import get_word_analysis
+from backend import db
+from backend.models.models import Word, UserProgress
+from backend.services import get_word_analysis
 import openai
 import os
 import traceback
 
-api = Blueprint('api', __name__)
+api_bp = Blueprint('api', __name__)
 
-@api.route('/api/analyze', methods=['POST'])
+@api_bp.route('/api/analyze', methods=['POST'])
 def analyze_word():
     try:
         data = request.get_json()
@@ -48,7 +48,7 @@ def analyze_word():
         print(traceback.format_exc())
         return jsonify({'error': 'Internal server error'}), 500
 
-@api.route('/api/history', methods=['GET'])
+@api_bp.route('/api/history', methods=['GET'])
 def get_history():
     try:
         words = Word.query.order_by(Word.updated_at.desc()).limit(50).all()
@@ -58,7 +58,7 @@ def get_history():
         print(traceback.format_exc())
         return jsonify({'error': 'Internal server error'}), 500
 
-@api.route('/api/progress', methods=['POST'])
+@api_bp.route('/api/progress', methods=['POST'])
 def update_progress():
     try:
         data = request.get_json()
