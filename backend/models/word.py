@@ -7,7 +7,6 @@ class WordAnalysis(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     word = db.Column(db.String(255), nullable=False)
-    part_of_speech = db.Column(db.String(50), nullable=True)  # Make nullable
     language = db.Column(db.String(50), default='german', nullable=True)  # Make nullable
     data = db.Column(JSONB, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -22,7 +21,6 @@ class WordAnalysis(db.Model):
         return {
             'id': self.id,
             'word': self.word,
-            'part_of_speech': self.part_of_speech,
             'language': self.language,
             'data': self.data,
             'created_at': self.created_at.isoformat() if self.created_at else None,

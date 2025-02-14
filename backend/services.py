@@ -49,26 +49,45 @@ def get_word_analysis(word):
         
         if response.status_code != 200:
             raise Exception(f"API request failed with status {response.status_code}: {response.text}")
-        
+            
         response_data = response.json()
-        print(f"Received response from API")
+        if not response_data.get('choices') or not response_data['choices'][0].get('message'):
+            raise Exception("Invalid response format from OpenAI API")
+            
+        content = response_data['choices'][0]['message']['content']
         
-        # Extract the completion text from the response
-        if response_data.get('choices') and len(response_data['choices']) > 0:
-            content = response_data['choices'][0]['message']['content']
-        else:
-            raise Exception("No completion found in API response")
-        
-        # Ensure the response is valid JSON
+        # Try to parse the response as JSON
         try:
-            # Parse the content to ensure it's valid JSON
-            parsed_content = json.loads(content)
-            return parsed_content
-        except json.JSONDecodeError as e:
-            print(f"Error parsing JSON response: {e}")
-            print(f"Raw response: {content}")
-            raise Exception("Invalid JSON response from API")
+            word_analysis = json.loads(content)
+        except json.JSONDecodeError:
+            # If the response isn't valid JSON, try to extract JSON from the text
+            start = content.find('{')
+            end = content.rfind('}') + 1
+            if start >= 0 and end > start:
+                try:
+                    word_analysis = json.loads(content[start:end])
+                except json.JSONDecodeError:
+                    raise Exception("Could not parse OpenAI response as JSON")
+            else:
+                raise Exception("Could not find JSON content in OpenAI response")
+        
+        # Ensure the response matches our expected format
+        required_fields = ['word', 'part_of_speech', 'meanings']
+        for field in required_fields:
+            if field not in word_analysis:
+                word_analysis[field] = None if field != 'meanings' else []
+                
+        # Format the response
+        formatted_response = {
+            'word': word,
+            'part_of_speech': word_analysis.get('part_of_speech', 'unknown'),
+            'meanings': word_analysis.get('meanings', []),
+            'grammar': word_analysis.get('grammar', {}),
+            'data': word_analysis  # Store the full analysis
+        }
+        
+        return formatted_response
         
     except Exception as e:
-        print(f"Error in get_word_analysis: {str(e)}")
+        print(f"Error getting word analysis: {str(e)}")
         raise Exception(f"Error getting word analysis: {str(e)}")

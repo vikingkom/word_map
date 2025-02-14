@@ -13,6 +13,24 @@ logger = logging.getLogger(__name__)
 
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
+def format_response(word_data):
+    """Format the word data to match frontend expectations."""
+    if isinstance(word_data, dict):
+        data = word_data.get('data', {})
+        return {
+            'id': word_data.get('id'),
+            'word': word_data.get('word'),
+            'data': data,
+            'meanings': data.get('meanings', []),
+            'grammar': data.get('grammar', {}),
+            'part_of_speech': data.get('part_of_speech', 'unknown'),
+            'created_at': word_data.get('created_at'),
+            'updated_at': word_data.get('updated_at'),
+            'search_count': word_data.get('search_count', 0)
+        }
+    # If it's a model instance, convert to dict first
+    return format_response(word_data.to_dict())
+
 @api_bp.route('/analyze', methods=['POST'])
 def analyze_word():
     try:
@@ -41,7 +59,7 @@ def analyze_word():
             logger.debug("Found existing word")
             existing_word.search_count += 1
             db.session.commit()
-            return jsonify(existing_word.to_dict())
+            return jsonify(format_response(existing_word))
 
         try:
             # Get analysis from ChatGPT
@@ -53,7 +71,7 @@ def analyze_word():
             db.session.add(new_word)
             db.session.commit()
             
-            return jsonify(new_word.to_dict())
+            return jsonify(format_response(new_word))
         
         except Exception as e:
             logger.error(f"Error in word analysis: {str(e)}")
@@ -69,7 +87,7 @@ def analyze_word():
 def get_history():
     try:
         words = Word.query.order_by(Word.updated_at.desc()).limit(50).all()
-        return jsonify([word.to_dict() for word in words])
+        return jsonify([format_response(word) for word in words])
     except Exception as e:
         logger.error(f"Error in get_history endpoint: {str(e)}")
         logger.error(traceback.format_exc())
