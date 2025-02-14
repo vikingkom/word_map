@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, current_app
 from backend import db
 from backend.models.word import WordAnalysis as Word
-from backend.services import get_word_analysis
+from backend.services import word_analysis_service
 import openai
 import os
 import traceback
@@ -64,7 +64,7 @@ def analyze_word():
         try:
             # Get analysis from ChatGPT
             logger.debug("Getting word analysis from ChatGPT")
-            word_data = get_word_analysis(word)
+            word_data = word_analysis_service.get_word_analysis(word)
             
             # Save to database
             new_word = Word(word=word, data=word_data)

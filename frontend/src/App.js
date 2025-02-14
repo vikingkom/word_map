@@ -22,18 +22,13 @@ function App() {
   const [searchResult, setSearchResult] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
 
-  const handleSearchComplete = (result) => {
-    setSearchResult(result);
-    setLoading(false);
-  };
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container maxWidth="lg">
         <Box sx={{ my: 4 }}>
           <WordSearch 
-            onSearchComplete={handleSearchComplete} 
+            onSearchComplete={setSearchResult} 
             setLoading={setLoading} 
           />
           <WordResult 
@@ -41,7 +36,7 @@ function App() {
             loading={loading} 
           />
           <SearchHistory 
-            onSelectWord={handleSearchComplete}
+            onSelectWord={setSearchResult} 
           />
         </Box>
       </Container>

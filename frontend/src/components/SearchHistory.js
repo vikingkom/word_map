@@ -26,18 +26,6 @@ const SearchHistory = ({ onSelectWord }) => {
     }
   };
 
-  const handleWordSelect = async (word) => {
-    try {
-      // Make a new API call to get fresh data
-      const response = await axios.post('http://localhost:5000/api/analyze', { word: word.word });
-      onSelectWord(response.data);
-      // Refresh history after selection to update search count
-      fetchHistory();
-    } catch (error) {
-      console.error('Error analyzing word:', error);
-    }
-  };
-
   return (
     <Paper elevation={3} sx={{ p: 3 }}>
       <Typography variant="h6" gutterBottom>
@@ -56,7 +44,7 @@ const SearchHistory = ({ onSelectWord }) => {
               />
             }
           >
-            <ListItemButton onClick={() => handleWordSelect(item)}>
+            <ListItemButton onClick={() => onSelectWord(item)}>
               <ListItemText
                 primary={item.word}
                 secondary={`Last searched: ${new Date(

@@ -1,0 +1,281 @@
+{
+    "name": "analyze_german_word",
+    "description": "Analyze a German word and provide detailed linguistic information including meanings, translations, grammar, and usage examples",
+    "parameters": {
+        "type": "object",
+        "required": ["word", "part_of_speech", "meanings", "grammar"],
+        "properties": {
+            "word": {
+                "type": "string",
+                "description": "The German word being analyzed"
+            },
+            "part_of_speech": {
+                "type": "string",
+                "enum": ["noun", "verb", "adjective", "adverb", "preposition", "conjunction", "interjection"],
+                "description": "The grammatical part of speech"
+            },
+            "meanings": {
+                "type": "array",
+                "description": "Different meanings of the word, ordered by usage frequency and language level",
+                "items": {
+                    "type": "object",
+                    "required": ["meaning", "translations", "best_language_for_memorization", "examples", "usage_frequency", "comprehension_level"],
+                    "properties": {
+                        "meaning": {
+                            "type": "string",
+                            "description": "Description of this meaning"
+                        },
+                        "usage_frequency": {
+                            "type": "string",
+                            "enum": ["low", "medium", "high"],
+                            "description": "How frequently this meaning is used"
+                        },
+                        "comprehension_level": {
+                            "type": "string",
+                            "enum": ["A1", "A2", "B1", "B2", "C1", "C2"],
+                            "description": "CEFR language level for this meaning"
+                        },
+                        "translations": {
+                            "type": "object",
+                            "required": ["en", "ru"],
+                            "properties": {
+                                "en": {
+                                    "type": "array",
+                                    "items": {"type": "string"},
+                                    "description": "English translations, ordered by precision"
+                                },
+                                "ru": {
+                                    "type": "array",
+                                    "items": {"type": "string"},
+                                    "description": "Russian translations, ordered by precision"
+                                }
+                            }
+                        },
+                        "best_language_for_memorization": {
+                            "type": "object",
+                            "required": ["language", "reason"],
+                            "properties": {
+                                "language": {
+                                    "type": "string",
+                                    "enum": ["English", "Russian"],
+                                    "description": "Best language for memorizing this meaning"
+                                },
+                                "reason": {
+                                    "type": "string",
+                                    "description": "Detailed explanation why this language is better for memorization"
+                                }
+                            }
+                        },
+                        "memorization_hint": {
+                            "type": "object",
+                            "properties": {
+                                "hint": {
+                                    "type": "string",
+                                    "description": "A mnemonic device or memory trick"
+                                },
+                                "explanation": {
+                                    "type": "string",
+                                    "description": "Explanation of why this hint works"
+                                }
+                            }
+                        },
+                        "examples": {
+                            "type": "object",
+                            "required": ["illustrative", "real_world"],
+                            "properties": {
+                                "illustrative": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "required": ["de", "en", "ru"],
+                                        "properties": {
+                                            "de": {"type": "string"},
+                                            "en": {"type": "string"},
+                                            "ru": {"type": "string"}
+                                        }
+                                    },
+                                    "minItems": 3,
+                                    "description": "Simple and clear examples"
+                                },
+                                "real_world": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "required": ["de", "en", "ru", "source"],
+                                        "properties": {
+                                            "de": {"type": "string"},
+                                            "en": {"type": "string"},
+                                            "ru": {"type": "string"},
+                                            "source": {"type": "string"}
+                                        }
+                                    },
+                                    "minItems": 3,
+                                    "description": "Examples from books, media, or conversations"
+                                }
+                            }
+                        },
+                        "prepositions": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "required": ["preposition", "case", "examples"],
+                                "properties": {
+                                    "preposition": {"type": "string"},
+                                    "case": {
+                                        "type": "string",
+                                        "enum": ["accusative", "dative", "genitive"]
+                                    },
+                                    "examples": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "required": ["de", "en", "ru"],
+                                            "properties": {
+                                                "de": {"type": "string"},
+                                                "en": {"type": "string"},
+                                                "ru": {"type": "string"}
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "semantic_network": {
+                            "type": "object",
+                            "properties": {
+                                "synonyms": {
+                                    "type": "array",
+                                    "items": {"type": "string"},
+                                    "description": "German synonyms"
+                                },
+                                "antonyms": {
+                                    "type": "array",
+                                    "items": {"type": "string"},
+                                    "description": "German antonyms"
+                                }
+                            }
+                        },
+                        "idioms_and_common_phrases": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "required": ["phrase", "literal_translation", "meaning", "examples"],
+                                "properties": {
+                                    "phrase": {"type": "string"},
+                                    "literal_translation": {
+                                        "type": "object",
+                                        "properties": {
+                                            "en": {"type": "string"},
+                                            "ru": {"type": "string"}
+                                        }
+                                    },
+                                    "meaning": {
+                                        "type": "object",
+                                        "properties": {
+                                            "en": {"type": "string"},
+                                            "ru": {"type": "string"}
+                                        }
+                                    },
+                                    "examples": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "required": ["de", "en", "ru"],
+                                            "properties": {
+                                                "de": {"type": "string"},
+                                                "en": {"type": "string"},
+                                                "ru": {"type": "string"}
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "grammar": {
+                "type": "object",
+                "properties": {
+                    "noun": {
+                        "type": "object",
+                        "properties": {
+                            "gender": {
+                                "type": "string",
+                                "enum": ["m", "f", "n"]
+                            },
+                            "plural": {
+                                "type": "string"
+                            },
+                            "cases": {
+                                "type": "object",
+                                "properties": {
+                                    "nominative": {"type": "string"},
+                                    "accusative": {"type": "string"},
+                                    "dative": {"type": "string"},
+                                    "genitive": {"type": "string"}
+                                }
+                            }
+                        }
+                    },
+                    "verb": {
+                        "type": "object",
+                        "properties": {
+                            "infinitive": {"type": "string"},
+                            "conjugation": {
+                                "type": "object",
+                                "properties": {
+                                    "present": {"type": "string"},
+                                    "past": {"type": "string"},
+                                    "perfect": {"type": "string"},
+                                    "subjunctive": {"type": "string"},
+                                    "imperative": {"type": "string"}
+                                }
+                            },
+                            "all_forms": {
+                                "type": "object",
+                                "properties": {
+                                    "ich": {"type": "string"},
+                                    "du": {"type": "string"},
+                                    "er/sie/es": {"type": "string"},
+                                    "wir": {"type": "string"},
+                                    "ihr": {"type": "string"},
+                                    "sie/Sie": {"type": "string"}
+                                }
+                            },
+                            "grammar_properties": {
+                                "type": "object",
+                                "properties": {
+                                    "type": {
+                                        "type": "string",
+                                        "enum": ["transitive", "intransitive", "reflexive"]
+                                    },
+                                    "required_case": {
+                                        "type": "string",
+                                        "enum": ["accusative", "dative", "genitive"]
+                                    },
+                                    "common_prepositions": {
+                                        "type": "array",
+                                        "items": {"type": "string"}
+                                    },
+                                    "auxiliary_verb": {
+                                        "type": "string",
+                                        "enum": ["haben", "sein"]
+                                    },
+                                    "separable_prefix": {"type": "string"},
+                                    "declension": {
+                                        "type": "object",
+                                        "properties": {
+                                            "present_participle": {"type": "string"},
+                                            "past_participle": {"type": "string"}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

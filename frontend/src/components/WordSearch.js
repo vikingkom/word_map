@@ -25,6 +25,8 @@ const WordSearch = ({ onSearchComplete, setLoading }) => {
       onSearchComplete(response.data);
     } catch (error) {
       console.error('Error analyzing word:', error);
+      // TODO: Add error handling UI
+    } finally {
       setLoading(false);
     }
   };
