@@ -5,8 +5,8 @@
     {
       "meaning": "<meaning_description>",
       "translations": {
-        "english": ["<translation1>", "<translation2>"],
-        "russian": ["<translation1>", "<translation2>"]
+        "en": ["<translation1>", "<translation2>"],
+        "ru": ["<translation1>", "<translation2>"]
       },
       "best_language_for_memorization": {
         "language": "<English/Russian>",
@@ -49,15 +49,11 @@
       "idioms_and_common_phrases": [
         {
           "phrase": "<German idiom or phrase>",
-          "literal_translation": "<Literal translation>",
-          "meaning": "<Actual meaning/explanation>",
-          "examples": [
-            {
-              "de": "<German sentence>",
-              "en": "<English translation>",
-              "ru": "<Russian translation>"
-            }
-          ]
+          "meaning": "<meaning explanation>",
+          "translations": {
+            "en": "<English translation>",
+            "ru": "<Russian translation>"
+          }
         }
       ]
     }

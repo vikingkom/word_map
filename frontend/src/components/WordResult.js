@@ -22,6 +22,11 @@ import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
 import LanguageIcon from '@mui/icons-material/Language';
 import FlagIcon from '@mui/icons-material/Flag';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import PublicIcon from '@mui/icons-material/Public';
+import CompareIcon from '@mui/icons-material/Compare';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import { GB, RU, DE } from 'country-flag-icons/react/3x2';
 
 const FlagComponent = ({ country, size = 20 }) => {
@@ -235,61 +240,52 @@ const IdiomsSection = ({ idioms }) => {
   );
 };
 
-const MemorizationHintSection = ({ hint, reason, language }) => (
-  <Box 
-    sx={{ 
-      backgroundColor: '#f0f4f8', 
-      borderRadius: 2, 
-      p: 2, 
-      mb: 2, 
-      display: 'flex', 
-      alignItems: 'center',
-      gap: 2
-    }}
-  >
-    <LightbulbIcon color="primary" />
-    <Box>
-      <Typography variant="subtitle2" color="text.secondary">
-        Best Language for Memorization: {language}
-      </Typography>
-      <Typography variant="body2" color="text.primary">
-        {reason}
-      </Typography>
-      {hint && (
-        <Typography variant="body2" color="primary.main" sx={{ mt: 1, fontStyle: 'italic' }}>
-          Memorization Hint: {hint}
-        </Typography>
-      )}
-    </Box>
-  </Box>
-);
-
-const SemanticNetworkSection = ({ synonyms, antonyms }) => {
-  console.log('Semantic Network Data:', { synonyms, antonyms });
-
-  if (!synonyms?.length && !antonyms?.length) {
-    console.log('No synonyms or antonyms found');
-    return null;
-  }
+const MemorizationHintSection = ({ best_language_for_memorization }) => {
+  if (!best_language_for_memorization) return null;
+  const { hint, language, reason } = best_language_for_memorization;
 
   return (
-    <Box>
+    <MinimalCard icon={EmojiObjectsIcon} title="Memorization Hint">
+      <Box sx={{ pl: 2 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+          <FlagComponent country={language === 'English' ? 'GB' : language === 'Russian' ? 'RU' : 'DE'} />
+          <Typography variant="subtitle2" color="primary" sx={{ ml: 1 }}>
+            Best Language: {language}
+          </Typography>
+        </Box>
+        <Typography variant="body2" sx={{ mb: 1 }}>{hint}</Typography>
+        <Typography variant="body2" color="text.secondary">
+          Why? {reason}
+        </Typography>
+      </Box>
+    </MinimalCard>
+  );
+};
+
+const SemanticNetworkSection = ({ synonyms, antonyms }) => {
+  if (!synonyms?.length && !antonyms?.length) return null;
+
+  return (
+    <MinimalCard icon={CompareIcon} title="Semantic Network">
       {/* Synonyms */}
       {synonyms?.length > 0 && (
-        <Box sx={{ mb: 2 }}>
-          <Typography variant="subtitle2" color="text.secondary">
-            Synonyms
-          </Typography>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 1 }}>
-            {synonyms.map((syn, idx) => (
-              <Tooltip key={idx} title={syn.usage_notes || ''}>
-                <Chip
-                  label={syn}
-                  size="small"
-                  variant="outlined"
-                  color="success"
-                />
-              </Tooltip>
+        <Box sx={{ mb: synonyms?.length > 0 ? 2 : 0 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+            <TrendingUpIcon color="success" fontSize="small" />
+            <Typography variant="subtitle2" color="success.main">
+              Synonyms
+            </Typography>
+          </Box>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, pl: 2 }}>
+            {synonyms.map((synonym, index) => (
+              <Chip
+                key={index}
+                label={synonym}
+                size="small"
+                color="success"
+                variant="outlined"
+                sx={{ borderRadius: 1 }}
+              />
             ))}
           </Box>
         </Box>
@@ -298,24 +294,27 @@ const SemanticNetworkSection = ({ synonyms, antonyms }) => {
       {/* Antonyms */}
       {antonyms?.length > 0 && (
         <Box>
-          <Typography variant="subtitle2" color="text.secondary">
-            Antonyms
-          </Typography>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 1 }}>
-            {antonyms.map((ant, idx) => (
-              <Tooltip key={idx} title={ant.usage_notes || ''}>
-                <Chip
-                  label={ant}
-                  size="small"
-                  variant="outlined"
-                  color="error"
-                />
-              </Tooltip>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+            <TrendingDownIcon color="error" fontSize="small" />
+            <Typography variant="subtitle2" color="error.main">
+              Antonyms
+            </Typography>
+          </Box>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, pl: 2 }}>
+            {antonyms.map((antonym, index) => (
+              <Chip
+                key={index}
+                label={antonym}
+                size="small"
+                color="error"
+                variant="outlined"
+                sx={{ borderRadius: 1 }}
+              />
             ))}
           </Box>
         </Box>
       )}
-    </Box>
+    </MinimalCard>
   );
 };
 
@@ -350,218 +349,216 @@ const ExpandableSection = ({ title, icon: Icon, children }) => {
 const DetailedGrammarSection = ({ grammar }) => {
   if (!grammar) return null;
 
+  const { verb } = grammar;
+  if (!verb) return null;
+
   return (
-    <Box>
-      {/* Part of Speech */}
-      {grammar.part_of_speech && (
-        <Box sx={{ mb: 2 }}>
-          <Typography variant="subtitle2" color="text.secondary">
-            Part of Speech
-          </Typography>
-          <Typography>{grammar.part_of_speech}</Typography>
-        </Box>
-      )}
-
-      {/* Gender */}
-      {grammar.gender && (
-        <Box sx={{ mb: 2 }}>
-          <Typography variant="subtitle2" color="text.secondary">
-            Gender
-          </Typography>
-          <Typography>{grammar.gender}</Typography>
-        </Box>
-      )}
-
-      {/* Case Usage */}
-      {grammar.case_usage && (
-        <Box sx={{ mb: 2 }}>
-          <Typography variant="subtitle2" color="text.secondary">
-            Case Usage
-          </Typography>
-          <Typography>{grammar.case_usage}</Typography>
-        </Box>
-      )}
+    <ExpandableSection title="Grammar Details" icon={MenuBookIcon}>
+      {/* Verb Properties */}
+      <Box sx={{ mb: 2 }}>
+        <Typography variant="subtitle2" color="primary">Verb Properties</Typography>
+        {verb.grammar_properties && (
+          <Box sx={{ pl: 2 }}>
+            {verb.grammar_properties.type && (
+              <Typography variant="body2">
+                Type: <Chip size="small" label={verb.grammar_properties.type} />
+              </Typography>
+            )}
+            {verb.grammar_properties.auxiliary_verb && (
+              <Typography variant="body2">
+                Auxiliary: <Chip size="small" label={verb.grammar_properties.auxiliary_verb} />
+              </Typography>
+            )}
+            {verb.grammar_properties.required_case && (
+              <Typography variant="body2">
+                Required Case: <Chip size="small" label={verb.grammar_properties.required_case} />
+              </Typography>
+            )}
+            {verb.grammar_properties.separable_prefix && (
+              <Typography variant="body2">
+                Separable Prefix: <Chip size="small" label={verb.grammar_properties.separable_prefix} />
+              </Typography>
+            )}
+            {verb.grammar_properties.common_prepositions?.length > 0 && (
+              <Typography variant="body2">
+                Common Prepositions: {' '}
+                {verb.grammar_properties.common_prepositions.map((prep, idx) => (
+                  <Chip key={idx} size="small" label={prep} sx={{ mr: 0.5 }} />
+                ))}
+              </Typography>
+            )}
+          </Box>
+        )}
+      </Box>
 
       {/* Conjugation */}
-      {grammar.conjugation && (
-        <Box sx={{ mb: 2 }}>
-          <Typography variant="subtitle2" color="text.secondary">
-            Conjugation
-          </Typography>
-          <Box sx={{ pl: 2 }}>
-            {Object.entries(grammar.conjugation).map(([tense, forms]) => (
-              <Box key={tense} sx={{ mb: 1 }}>
-                <Typography variant="subtitle2">{tense}</Typography>
-                <Box sx={{ pl: 2 }}>
-                  {Object.entries(forms).map(([person, form]) => (
-                    <Typography key={person} variant="body2">
-                      {person}: {form}
-                    </Typography>
-                  ))}
-                </Box>
-              </Box>
-            ))}
-          </Box>
+      <Box sx={{ mb: 2 }}>
+        <Typography variant="subtitle2" color="primary">Conjugation</Typography>
+        <Box sx={{ pl: 2 }}>
+          {verb.conjugation && Object.entries(verb.conjugation).map(([tense, form]) => (
+            <Typography key={tense} variant="body2">
+              {tense}: <strong>{form}</strong>
+            </Typography>
+          ))}
         </Box>
-      )}
+      </Box>
+
+      {/* All Forms */}
+      <Box sx={{ mb: 2 }}>
+        <Typography variant="subtitle2" color="primary">All Forms</Typography>
+        <Box sx={{ pl: 2 }}>
+          {verb.all_forms && Object.entries(verb.all_forms).map(([pronoun, form]) => (
+            <Typography key={pronoun} variant="body2">
+              {pronoun}: <strong>{form}</strong>
+            </Typography>
+          ))}
+        </Box>
+      </Box>
 
       {/* Declension */}
-      {grammar.declension && (
-        <Box sx={{ mb: 2 }}>
-          <Typography variant="subtitle2" color="text.secondary">
-            Declension
-          </Typography>
+      {verb.grammar_properties?.declension && (
+        <Box>
+          <Typography variant="subtitle2" color="primary">Declension</Typography>
           <Box sx={{ pl: 2 }}>
-            {Object.entries(grammar.declension).map(([number, cases]) => (
-              <Box key={number} sx={{ mb: 1 }}>
-                <Typography variant="subtitle2">{number}</Typography>
-                <Box sx={{ pl: 2 }}>
-                  {Object.entries(cases).map(([caseType, form]) => (
-                    <Typography key={caseType} variant="body2">
-                      {caseType}: {form}
-                    </Typography>
-                  ))}
-                </Box>
-              </Box>
-            ))}
+            <Typography variant="body2">
+              Present Participle: <strong>{verb.grammar_properties.declension.present_participle}</strong>
+            </Typography>
+            <Typography variant="body2">
+              Past Participle: <strong>{verb.grammar_properties.declension.past_participle}</strong>
+            </Typography>
           </Box>
         </Box>
       )}
+    </ExpandableSection>
+  );
+};
 
-      {/* Additional Notes */}
-      {grammar.notes && (
-        <Box>
-          <Typography variant="subtitle2" color="text.secondary">
-            Additional Notes
-          </Typography>
-          <Typography variant="body2">{grammar.notes}</Typography>
+const ExamplesSection = ({ examples }) => {
+  if (!examples) return null;
+
+  return (
+    <MinimalCard icon={FormatQuoteIcon} title="Examples">
+      {/* Illustrative Examples */}
+      {examples.illustrative?.length > 0 && (
+        <Box sx={{ mb: 2 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+            <AutoStoriesIcon color="primary" fontSize="small" />
+            <Typography variant="subtitle2" color="primary">
+              Illustrative Examples
+            </Typography>
+          </Box>
+          {examples.illustrative.map((example, index) => (
+            <ExampleBox key={index} example={example} />
+          ))}
         </Box>
       )}
-    </Box>
+
+      {/* Real World Examples */}
+      {examples.real_world?.length > 0 && (
+        <Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+            <PublicIcon color="primary" fontSize="small" />
+            <Typography variant="subtitle2" color="primary">
+              Real World Examples
+            </Typography>
+          </Box>
+          {examples.real_world.map((example, index) => (
+            <ExampleBox key={index} example={example} />
+          ))}
+        </Box>
+      )}
+    </MinimalCard>
   );
 };
 
 const MeaningSection = ({ meaning, index }) => {
-  console.log('Meaning Data:', meaning);
-
   if (!meaning) return null;
 
   return (
-    <Paper elevation={1} sx={{ p: 2, mb: 2 }}>
-      {/* Header Section */}
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-        <Typography variant="h6">
+    <Paper sx={{ p: 2, mb: 2 }}>
+      {/* Main Meaning */}
+      <Box sx={{ mb: 2 }}>
+        <Typography variant="h6" gutterBottom>
           {index + 1}. {meaning.meaning}
         </Typography>
-        <Chip 
-          icon={<SpeedIcon />} 
-          label={meaning.usage_frequency} 
-          size="small" 
-          color="primary" 
-          variant="outlined" 
-        />
-        <Chip 
-          icon={<SchoolIcon />} 
-          label={meaning.comprehension_level} 
-          size="small" 
-          color="secondary" 
-          variant="outlined" 
-        />
       </Box>
 
-      {/* Translations Section */}
-      <Box sx={{ mb: 2 }}>
-        <Typography variant="subtitle2" sx={{ mb: 1 }}>
-          <TranslateIcon fontSize="small" sx={{ verticalAlign: 'middle', mr: 1 }} />
-          Translations
-        </Typography>
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-          {meaning.translations?.en?.map((trans, idx) => (
-            <LanguageChip key={idx} language="en" translations={trans} />
-          ))}
-          {meaning.translations?.ru?.map((trans, idx) => (
-            <LanguageChip key={idx} language="ru" translations={trans} />
-          ))}
-        </Box>
+      {/* Level and Frequency */}
+      <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
+        {meaning.comprehension_level && (
+          <Tooltip title="Comprehension Level">
+            <Chip
+              icon={<SchoolIcon />}
+              label={meaning.comprehension_level}
+              size="small"
+              color="primary"
+              variant="outlined"
+            />
+          </Tooltip>
+        )}
+        {meaning.usage_frequency && (
+          <Tooltip title="Usage Frequency">
+            <Chip
+              icon={<SpeedIcon />}
+              label={meaning.usage_frequency}
+              size="small"
+              color="secondary"
+              variant="outlined"
+            />
+          </Tooltip>
+        )}
       </Box>
 
-      {/* Memorization Section */}
-      {meaning.memorization_hint && (
-        <MemorizationHintSection 
-          hint={meaning.memorization_hint.hint}
-          reason={meaning.memorization_hint.reason}
-          language={meaning.memorization_hint.language}
-        />
-      )}
-
-      {/* Examples Section */}
-      {(meaning.examples?.illustrative?.length > 0 || meaning.examples?.real_world?.length > 0) && (
-        <ExpandableSection title="Examples" icon={MenuBookIcon}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            {/* Illustrative Examples */}
-            {meaning.examples?.illustrative?.length > 0 && (
-              <Box>
-                <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
-                  Illustrative Examples:
-                </Typography>
-                {meaning.examples.illustrative.map((ex, idx) => (
-                  <ExampleBox 
-                    key={idx} 
-                    example={ex}
-                  />
-                ))}
-              </Box>
-            )}
-
-            {/* Real-world Examples */}
-            {meaning.examples?.real_world?.length > 0 && (
-              <Box>
-                <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
-                  Real-world Examples:
-                </Typography>
-                {meaning.examples.real_world.map((ex, idx) => (
-                  <Box key={idx}>
-                    <ExampleBox example={ex} />
-                    <Typography variant="caption" color="text.secondary" sx={{ pl: 4 }}>
-                      Source: {ex.source}
-                    </Typography>
-                  </Box>
-                ))}
-              </Box>
-            )}
+      {/* Translations */}
+      {(meaning.translations?.en?.length > 0 || meaning.translations?.ru?.length > 0) && (
+        <MinimalCard icon={TranslateIcon} title="Translations">
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+            {meaning.translations.en?.map((translation, idx) => (
+              <LanguageChipNew
+                key={`en-${idx}`}
+                language="en"
+                translations={translation}
+              />
+            ))}
+            {meaning.translations.ru?.map((translation, idx) => (
+              <LanguageChipNew
+                key={`ru-${idx}`}
+                language="ru"
+                translations={translation}
+              />
+            ))}
           </Box>
-        </ExpandableSection>
+        </MinimalCard>
       )}
 
-      {/* Prepositions Section */}
+      {/* Memorization Hint */}
+      {meaning.best_language_for_memorization && (
+        <MemorizationHintSection 
+          best_language_for_memorization={meaning.best_language_for_memorization}
+        />
+      )}
+
+      {/* Examples */}
+      {(meaning.examples?.illustrative?.length > 0 || meaning.examples?.real_world?.length > 0) && (
+        <ExamplesSection examples={meaning.examples} />
+      )}
+
+      {/* Prepositions */}
       {meaning.prepositions?.length > 0 && (
-        <ExpandableSection title="Prepositions" icon={LinkIcon}>
-          <PrepositionSection prepositions={meaning.prepositions} />
-        </ExpandableSection>
+        <PrepositionSection prepositions={meaning.prepositions} />
       )}
 
-      {/* Semantic Network Section */}
-      {(meaning.semantic_network?.synonyms?.length > 0 || meaning.semantic_network?.antonyms?.length > 0) && (
-        <ExpandableSection title="Semantic Network" icon={CompareArrowsIcon}>
-          <SemanticNetworkSection 
-            synonyms={meaning.semantic_network.synonyms}
-            antonyms={meaning.semantic_network.antonyms}
-          />
-        </ExpandableSection>
+      {/* Semantic Network */}
+      {(meaning.synonyms?.length > 0 || meaning.antonyms?.length > 0) && (
+        <SemanticNetworkSection
+          synonyms={meaning.synonyms}
+          antonyms={meaning.antonyms}
+        />
       )}
 
-      {/* Idioms Section */}
+      {/* Idioms and Common Phrases */}
       {meaning.idioms_and_common_phrases?.length > 0 && (
-        <ExpandableSection title="Idioms & Phrases" icon={FormatQuoteIcon}>
-          <IdiomsSection idioms={meaning.idioms_and_common_phrases} />
-        </ExpandableSection>
-      )}
-
-      {/* Grammar Section */}
-      {meaning.grammar && (
-        <ExpandableSection title="Grammar Details" icon={GradeIcon}>
-          <DetailedGrammarSection grammar={meaning.grammar} />
-        </ExpandableSection>
+        <IdiomsSection idioms={meaning.idioms_and_common_phrases} />
       )}
     </Paper>
   );

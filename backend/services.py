@@ -16,7 +16,7 @@ class WordAnalysisService:
             raise ValueError("OpenAI API key not found in environment variables")
             
         # Load the OpenAI function schema
-        schema_path = os.path.join(os.path.dirname(__file__), 'schemas', 'word_analysis_openai.json')
+        schema_path = os.path.join(os.path.dirname(__file__), 'schemas', 'word_openai_schema.json')
         with open(schema_path, 'r', encoding='utf-8') as f:
             self.function_schema = json.load(f)
     
