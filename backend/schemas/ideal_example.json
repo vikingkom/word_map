@@ -1,0 +1,129 @@
+{
+    "word": "bevorstehen",
+    "part_of_speech": "verb",
+    "meanings": [
+      {
+        "meaning": "To be imminent; to be about to happen",
+        "translations": {
+          "en": ["to be imminent", "to be forthcoming", "to be about to happen"],
+          "ru": ["предстоять", "надвигаться", "быть неизбежным"]
+        },
+        "usage_frequency": "medium",
+        "comprehension_level": "B2",
+        "best_language_for_memorization": {
+          "language": "Russian",
+          "reason": "The Russian word 'предстоять' has a nearly identical meaning and usage, making it easier to memorize for Russian speakers."
+        },
+        "examples": {
+          "illustrative": [
+            {
+              "de": "Eine große Veränderung steht uns bevor.",
+              "en": "A major change is imminent for us.",
+              "ru": "Нам предстоит большая перемена."
+            },
+            {
+              "de": "Dem Land steht eine Wirtschaftskrise bevor.",
+              "en": "An economic crisis is imminent for the country.",
+              "ru": "Стране предстоит экономический кризис."
+            },
+            {
+              "de": "Der Winter steht bevor.",
+              "en": "Winter is approaching.",
+              "ru": "Зима приближается."
+            }
+          ],
+          "real_world": [
+            {
+              "de": "Dem Unternehmen steht eine Fusion bevor.",
+              "en": "The company is facing a merger.",
+              "ru": "Компании предстоит слияние."
+            },
+            {
+              "de": "Dem Patienten steht eine schwierige Operation bevor.",
+              "en": "The patient is facing a difficult surgery.",
+              "ru": "Пациенту предстоит сложная операция."
+            },
+            {
+              "de": "Uns steht eine lange Reise bevor.",
+              "en": "A long journey lies ahead of us.",
+              "ru": "Нам предстоит долгий путь."
+            }
+          ]
+        },
+        "related_words": {
+          "synonyms": ["nahen", "drohen", "unmittelbar bevorstehen"],
+          "antonyms": ["zurückliegen", "vergangen sein"],
+          "idioms_and_common_phrases": [
+            {
+              "phrase": "Etwas steht kurz bevor",
+              "literal": "Something is just about to happen",
+              "meaning": "Something is imminent",
+              "examples": [
+                {
+                  "de": "Das neue Jahr steht kurz bevor.",
+                  "en": "The new year is just around the corner.",
+                  "ru": "Новый год уже близко."
+                },
+                {
+                  "de": "Der Abflug steht kurz bevor.",
+                  "en": "The departure is imminent.",
+                  "ru": "Вылет вот-вот состоится."
+                },
+                {
+                  "de": "Eine Entscheidung steht kurz bevor.",
+                  "en": "A decision is about to be made.",
+                  "ru": "Решение вот-вот будет принято."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "grammar": {
+      "verb": {
+        "infinitive": "bevorstehen",
+        "all_forms": {
+          "ich": "stehe bevor",
+          "du": "stehst bevor",
+          "er/sie/es": "steht bevor",
+          "wir": "stehen bevor",
+          "ihr": "steht bevor",
+          "sie/Sie": "stehen bevor"
+        },
+        "conjugation": {
+          "present": "steht bevor",
+          "past": "stand bevor",
+          "perfect": "hat bevorgestanden",
+          "subjunctive": "stünde bevor",
+          "imperative": "Steh bevor! / Steht bevor! / Stehen Sie bevor!"
+        },
+        "grammar_properties": {
+          "type": "intransitive",
+          "auxiliary_verb": "haben",
+          "required_case": "none",
+          "common_prepositions": ["vor"],
+          "separable_prefix": "bevor",
+          "declension": {
+            "present_participle": "bevorstehend",
+            "past_participle": "bevorgestanden"
+          }
+        },
+        "related_phrases": [
+          {
+            "phrase": "Eine Herausforderung steht bevor.",
+            "meaning": "A challenge is ahead."
+          },
+          {
+            "phrase": "Dem Team steht eine schwierige Aufgabe bevor.",
+            "meaning": "The team is facing a difficult task."
+          },
+          {
+            "phrase": "Es steht eine große Entscheidung bevor.",
+            "meaning": "A big decision is imminent."
+          }
+        ]
+      }
+    }
+  }
+  

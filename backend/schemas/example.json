@@ -1,236 +1,203 @@
 {
     "data": {
-      "grammar": {
-        "verb": {
-          "all_forms": {
-            "du": "stehst bevor",
-            "er/sie/es": "steht bevor",
-            "ich": "stehe bevor",
-            "ihr": "steht bevor",
-            "sie/Sie": "stehen bevor",
-            "wir": "stehen bevor"
-          },
-          "conjugation": {
-            "imperative": "bevorsteh!",
-            "past": "stand bevor",
-            "perfect": "hat bevorgestanden",
-            "present": "steht bevor",
-            "subjunctive": "stehe bevor"
-          },
-          "grammar_properties": {
-            "auxiliary_verb": "haben",
-            "common_prepositions": [
-              "vor"
-            ],
-            "declension": {
-              "past_participle": "bevorstanden",
-              "present_participle": "bevorstehend"
-            },
-            "required_case": "none",
-            "separable_prefix": "bevor-",
-            "type": "intransitive"
-          },
-          "infinitive": "bevorstehen",
-          "related_phrases": []
-        }
-      },
       "meanings": [
         {
-          "antonyms": [],
           "best_language_for_memorization": {
-            "hint": "Think of 'before' standing, something happening soon.",
             "language": "English",
-            "reason": "meaning similarity"
+            "reason": "Similar meaning and root word 'escape' in English."
           },
           "comprehension_level": "B2",
           "examples": {
             "illustrative": [
               {
-                "de": "Ein schwieriger Test steht bevor.",
-                "en": "A difficult test is imminent.",
-                "ru": "Трудный тест неизбежен."
+                "de": "Der Gefangene konnte aus dem Gefängnis entkommen.",
+                "en": "The prisoner managed to escape from the prison.",
+                "ru": "Заключенный смог сбежать из тюрьмы."
               },
               {
-                "de": "Große Veränderungen stehen bevor.",
-                "en": "Big changes are impending.",
-                "ru": "Большие изменения грозят."
+                "de": "Der Dieb entkam der Verfolgung.",
+                "en": "The thief escaped from the pursuit.",
+                "ru": "Вор ускользнул от преследования."
               },
               {
-                "de": "Ein wichtiger Termin steht bevor.",
-                "en": "An important appointment is approaching.",
-                "ru": "Важная встреча не за горами."
+                "de": "Wie kann man den Verantwortlichkeiten entkommen?",
+                "en": "How can one escape from the responsibilities?",
+                "ru": "Как можно избежать от ответственности?"
               }
             ],
             "real_world": [
               {
-                "de": "Die Feier steht bevor.",
-                "en": "The celebration is imminent.",
-                "ru": "Праздник не за горами."
+                "de": "Sie wollte ihrem Schicksal entkommen, aber es war aussichtslos.",
+                "en": "She wanted to escape her fate, but it was hopeless.",
+                "ru": "Она хотела избежать своей судьбы, но это было безнадежно.",
+                "source": "Book"
               },
               {
-                "de": "Der Urlaub steht bevor.",
-                "en": "The vacation is impending.",
-                "ru": "Отпуск грозит."
+                "de": "Er konnte nur knapp dem Sturz entkommen.",
+                "en": "He narrowly escaped the fall.",
+                "ru": "Он чуть не упал, к счастью. ",
+                "source": "Conversation"
               },
               {
-                "de": "Ein großer Erfolg steht bevor.",
-                "en": "A big success is on the horizon.",
-                "ru": "Большой успех не за горами."
+                "de": "Die Kinder entkommen dem Regen, indem sie unter dem Baum Schutz suchen.",
+                "en": "The children escape the rain by seeking shelter under the tree.",
+                "ru": "Дети уклонились от дождя, укрывшись под деревом.",
+                "source": "Media"
               }
             ]
           },
-          "idioms_and_common_phrases": [],
-          "meaning": "to be imminent or impending",
-          "prepositions": {
-            "vor": [
-              {
-                "de": "Große Herausforderungen stehen vor uns.",
-                "en": "Big challenges are ahead of us.",
-                "ru": "Большие вызовы впереди нас."
+          "grammar": {
+            "verb": {
+              "all_forms": {
+                "du": "entkommst",
+                "er/sie/es": "entkommt",
+                "ich": "entkomme",
+                "ihr": "entkommt",
+                "sie/Sie": "entkommen",
+                "wir": "entkommen"
               },
-              {
-                "de": "Eine wichtige Entscheidung steht vor der Tür.",
-                "en": "An important decision is around the corner.",
-                "ru": "Важное решение на пороге."
+              "conjugation": {
+                "imperative": "entkomme",
+                "past": "entkam",
+                "perfect": "ist entkommen",
+                "present": "entkomme",
+                "subjunctive": "entkäme"
               },
-              {
-                "de": "Ein neues Abenteuer steht vor Beginn.",
-                "en": "A new adventure is about to begin.",
-                "ru": "Новое приключение готово начаться."
-              }
-            ]
+              "grammar_properties": {
+                "auxiliary_verb": "sein",
+                "common_prepositions": [
+                  "aus",
+                  "vor",
+                  "dem"
+                ],
+                "declension": {
+                  "past_participle": "entkommen",
+                  "present_participle": "entkommend"
+                },
+                "required_case": "none",
+                "separable_prefix": "ent",
+                "type": "intransitive"
+              },
+              "infinitive": "entkommen",
+              "related_phrases": [
+                "der Verantwortlichkeiten entkommen"
+              ]
+            }
           },
-          "synonyms": [],
+          "meaning": "To escape from a situation or place by luck or skill.",
           "translations": {
-            "english": [
-              "to be imminent",
-              "to be impending"
+            "en": [
+              "to escape"
             ],
-            "russian": [
-              "быть неизбежным",
-              "быть грозящим"
+            "ru": [
+              "сбежать",
+              "избежать"
             ]
           },
-          "usage_frequency": "medium"
+          "usage_frequency": "high"
         }
       ],
       "part_of_speech": "verb",
-      "word": "bevorstehen"
+      "word": "entkommen"
     },
-    "grammar": {
-      "verb": {
-        "all_forms": {
-          "du": "stehst bevor",
-          "er/sie/es": "steht bevor",
-          "ich": "stehe bevor",
-          "ihr": "steht bevor",
-          "sie/Sie": "stehen bevor",
-          "wir": "stehen bevor"
-        },
-        "conjugation": {
-          "imperative": "bevorsteh!",
-          "past": "stand bevor",
-          "perfect": "hat bevorgestanden",
-          "present": "steht bevor",
-          "subjunctive": "stehe bevor"
-        },
-        "grammar_properties": {
-          "auxiliary_verb": "haben",
-          "common_prepositions": [
-            "vor"
-          ],
-          "declension": {
-            "past_participle": "bevorstanden",
-            "present_participle": "bevorstehend"
-          },
-          "required_case": "none",
-          "separable_prefix": "bevor-",
-          "type": "intransitive"
-        },
-        "infinitive": "bevorstehen",
-        "related_phrases": []
-      }
-    },
+    "grammar": {},
     "meanings": [
       {
-        "antonyms": [],
         "best_language_for_memorization": {
-          "hint": "Think of 'before' standing, something happening soon.",
           "language": "English",
-          "reason": "meaning similarity"
+          "reason": "Similar meaning and root word 'escape' in English."
         },
         "comprehension_level": "B2",
         "examples": {
           "illustrative": [
             {
-              "de": "Ein schwieriger Test steht bevor.",
-              "en": "A difficult test is imminent.",
-              "ru": "Трудный тест неизбежен."
+              "de": "Der Gefangene konnte aus dem Gefängnis entkommen.",
+              "en": "The prisoner managed to escape from the prison.",
+              "ru": "Заключенный смог сбежать из тюрьмы."
             },
             {
-              "de": "Große Veränderungen stehen bevor.",
-              "en": "Big changes are impending.",
-              "ru": "Большие изменения грозят."
+              "de": "Der Dieb entkam der Verfolgung.",
+              "en": "The thief escaped from the pursuit.",
+              "ru": "Вор ускользнул от преследования."
             },
             {
-              "de": "Ein wichtiger Termin steht bevor.",
-              "en": "An important appointment is approaching.",
-              "ru": "Важная встреча не за горами."
+              "de": "Wie kann man den Verantwortlichkeiten entkommen?",
+              "en": "How can one escape from the responsibilities?",
+              "ru": "Как можно избежать от ответственности?"
             }
           ],
           "real_world": [
             {
-              "de": "Die Feier steht bevor.",
-              "en": "The celebration is imminent.",
-              "ru": "Праздник не за горами."
+              "de": "Sie wollte ihrem Schicksal entkommen, aber es war aussichtslos.",
+              "en": "She wanted to escape her fate, but it was hopeless.",
+              "ru": "Она хотела избежать своей судьбы, но это было безнадежно.",
+              "source": "Book"
             },
             {
-              "de": "Der Urlaub steht bevor.",
-              "en": "The vacation is impending.",
-              "ru": "Отпуск грозит."
+              "de": "Er konnte nur knapp dem Sturz entkommen.",
+              "en": "He narrowly escaped the fall.",
+              "ru": "Он чуть не упал, к счастью. ",
+              "source": "Conversation"
             },
             {
-              "de": "Ein großer Erfolg steht bevor.",
-              "en": "A big success is on the horizon.",
-              "ru": "Большой успех не за горами."
+              "de": "Die Kinder entkommen dem Regen, indem sie unter dem Baum Schutz suchen.",
+              "en": "The children escape the rain by seeking shelter under the tree.",
+              "ru": "Дети уклонились от дождя, укрывшись под деревом.",
+              "source": "Media"
             }
           ]
         },
-        "idioms_and_common_phrases": [],
-        "meaning": "to be imminent or impending",
-        "prepositions": {
-          "vor": [
-            {
-              "de": "Große Herausforderungen stehen vor uns.",
-              "en": "Big challenges are ahead of us.",
-              "ru": "Большие вызовы впереди нас."
+        "grammar": {
+          "verb": {
+            "all_forms": {
+              "du": "entkommst",
+              "er/sie/es": "entkommt",
+              "ich": "entkomme",
+              "ihr": "entkommt",
+              "sie/Sie": "entkommen",
+              "wir": "entkommen"
             },
-            {
-              "de": "Eine wichtige Entscheidung steht vor der Tür.",
-              "en": "An important decision is around the corner.",
-              "ru": "Важное решение на пороге."
+            "conjugation": {
+              "imperative": "entkomme",
+              "past": "entkam",
+              "perfect": "ist entkommen",
+              "present": "entkomme",
+              "subjunctive": "entkäme"
             },
-            {
-              "de": "Ein neues Abenteuer steht vor Beginn.",
-              "en": "A new adventure is about to begin.",
-              "ru": "Новое приключение готово начаться."
-            }
-          ]
+            "grammar_properties": {
+              "auxiliary_verb": "sein",
+              "common_prepositions": [
+                "aus",
+                "vor",
+                "dem"
+              ],
+              "declension": {
+                "past_participle": "entkommen",
+                "present_participle": "entkommend"
+              },
+              "required_case": "none",
+              "separable_prefix": "ent",
+              "type": "intransitive"
+            },
+            "infinitive": "entkommen",
+            "related_phrases": [
+              "der Verantwortlichkeiten entkommen"
+            ]
+          }
         },
-        "synonyms": [],
+        "meaning": "To escape from a situation or place by luck or skill.",
         "translations": {
-          "english": [
-            "to be imminent",
-            "to be impending"
+          "en": [
+            "to escape"
           ],
-          "russian": [
-            "быть неизбежным",
-            "быть грозящим"
+          "ru": [
+            "сбежать",
+            "избежать"
           ]
         },
-        "usage_frequency": "medium"
+        "usage_frequency": "high"
       }
     ],
     "part_of_speech": "verb",
-    "word": "bevorstehen"
+    "word": "entkommen"
   }

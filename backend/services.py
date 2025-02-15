@@ -28,17 +28,14 @@ class WordAnalysisService:
         }
         
         data = {
-            "model": "gpt-3.5-turbo-0125",
+            "model": "gpt-3.5-turbo",
             "messages": [
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": f"Analyze the German word: {word}"}
             ],
             "functions": [self.function_schema],
             "function_call": {"name": "analyze_german_word"},
-            "temperature": 0.3,
-            "max_tokens": 1500,
-            "frequency_penalty": 0.3,
-            "presence_penalty": 0.3
+            "max_tokens": 1500
         }
         
         response = requests.post(
